@@ -1,0 +1,12 @@
+{
+  "name": "swaarm",
+  "version": "0.1.0",
+  "description": "Swaarm skills for Claude Code — domain knowledge for operating the Swaarm performance marketing and MMP platform through the Swaarm MCP server.",
+  "author": {
+    "name": "Swaarm",
+    "url": "https://swaarm.com"
+  },
+  "homepage": "https://docs.swaarm.com",
+  "repository": "https://github.com/swaarm/claude-plugin",
+  "keywords": ["swaarm", "mmp", "performance-marketing", "ad-tech", "mcp"]
+}
