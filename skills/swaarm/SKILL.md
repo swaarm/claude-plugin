@@ -1,6 +1,6 @@
 ---
 name: swaarm
-description: Use when the user is working with Swaarm — the performance marketing and mobile measurement platform — through the Swaarm MCP server at mcp.swaarm.com. Trigger whenever the user mentions Swaarm by name, references Swaarm Perform or Swaarm MMP, names any Swaarm entity (offer, publisher/partner, advertiser, leadflow, postback, conversion, macro, network adapter, optimization or automation rule), invokes any Swaarm MCP tool (list_offers, run_report, update_payout, update_budget, manage_offer_access, list_audits, get_conversion_report, query_clickhouse, etc.), or asks ad-network operational questions that obviously map onto Swaarm (e.g. "who changed this payout yesterday," "why did this conversion not fire a postback," "approve this publisher on that offer"). Also trigger when the user mentions docs.swaarm.com in an operational context. Do NOT trigger for unrelated ad-tech or affiliate platforms (Impact, Tune, Everflow) unless they are being imported into Swaarm via a network adapter. This skill teaches Claude the Swaarm domain model, the right vocabulary, the MCP tool surface with its gotchas, and the workflows a human operator would run — so Claude can act like a knowledgeable Swaarm teammate, not a generic assistant poking at tools.
+description: Use when the user is working with Swaarm — the performance marketing and mobile measurement platform — through the Swaarm MCP server at mcp.swaarm.com. Trigger whenever the user mentions Swaarm by name, references Swaarm Perform or Swaarm MMP, names any Swaarm entity (offer, publisher/partner, advertiser, leadflow, postback, conversion, macro, network adapter, optimization or automation rule), invokes any Swaarm MCP tool (list_offers, run_report, update_payout, update_budget, manage_offer_access, list_audits, get_conversion_report, query_clickhouse, etc.), or asks ad-network operational questions that obviously map onto Swaarm (e.g. "who changed this payout yesterday," "why did this conversion not fire a postback," "approve this publisher on that offer"). Also trigger when the user mentions docs.swaarm.com in an operational context.
 ---
 
 # Working with Swaarm via the MCP server
@@ -62,6 +62,15 @@ This is not about being timid — it's because these changes hit live revenue an
 **Batch intelligently.** If the user asks you to approve 30 publishers on an offer, don't stop for confirmation on each one — confirm the batch once with the list, then execute. If any single operation in the batch would be unusual (e.g., a publisher they've BLOCKED before), surface that before proceeding with it.
 
 **When in doubt, read `list_audits` and `get_*` before `update_*`.** This is the single most common way to avoid trouble. It's also how you'd answer the user's own question if they asked "are you sure no one else just changed this?"
+
+## MMP-side requests → swaarm-mmp skill
+
+If the user's request is about the MMP product — apps, store apps, installs, in-app events, SDK
+or S2S integration, attribution, retention/cohorts/DAU/funnels, user journeys, SKAdNetwork, or
+"partners" in an app-marketing context — use the **`swaarm-mmp`** skill instead of (or alongside)
+this one. Same MCP server, different vocabulary and workflows: MMP users say "partner" where this
+skill says "publisher", and their reporting centers on `activity_report`/`cohort_report`/
+`stickiness_report`/`funnel_report`/`user_journey_report` rather than run_report.
 
 ## Escalating to docs.swaarm.com
 
